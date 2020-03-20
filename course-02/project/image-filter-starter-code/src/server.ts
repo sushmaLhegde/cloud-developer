@@ -35,6 +35,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       res.status(400).send('Querty string missing');
     }
   } );
+  
   //! END @TODO1
   
   // Root Endpoint
