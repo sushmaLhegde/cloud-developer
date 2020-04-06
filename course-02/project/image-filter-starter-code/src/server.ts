@@ -1,5 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import fs from 'fs';
+import path from 'path';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
@@ -29,12 +31,49 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   /**************************************************************************** */
   app.get( "/filteredimage", async ( req, res ) => {
-    let image_url = req.query;
-    if(image_url == null)
+    let{image_url} = req.query;
+    if(!image_url)
     {
       res.status(400).send('Querty string missing');
     }
+    
+   const promisedPath = filterImageFromURL(image_url)
+   promisedPath.catch(err =>{
+
+    console.log('An error occured while trying to read the file');
+   });
+   promisedPath.then(function(filteredpath) { 
+      res.status(200).sendFile(filteredpath);
+
+      res.on('close', () =>
+      { 
+        let tempDir = __dirname +'/util/tmp'
+        
+       fs.readdir(tempDir, function(err,files) {
+
+        if(err)
+        {
+          console.log('Could not read the directory'+ tempDir);
+        }
+        const fullPathFileArray : Array<string> = [];
+        files.forEach(function(file,index)
+        {
+            fullPathFileArray.push(path.join(tempDir,file))
+        })
+        deleteLocalFiles(fullPathFileArray);
+       });
+          
+
+      });
+    })
+    .catch(error => {
+      res.status(400).send('Could not reach Image URL');
+    });
+
+ 
   } );
+
+
   
   //! END @TODO1
   

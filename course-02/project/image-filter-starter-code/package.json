@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf www/ || true",
-    "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
+    "build": "npm run clean && tsc && cp package.json www/package.json && cd www && mkdir tmp && zip -r Archive.zip . && cd ..",
     "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grutt/udacity-c2-image-filter.git"
+    "url": "git+https://github.com/sushmaLhegde/cloud-developer/tree/master/course-02/project"
   },
   "author": "",
   "license": "ISC",
