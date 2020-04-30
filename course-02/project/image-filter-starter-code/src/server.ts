@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import fs from 'fs';
 import path from 'path';
@@ -7,7 +7,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 (async () => {
 
   // Init the Express application
-  const app = express();
+  const app :express.Application= express();
 
   // Set the network port
   const port = process.env.PORT || 8082;
@@ -30,14 +30,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  app.get( "/filteredimage", async ( req, res ) => {
-    let{image_url} = req.query;
+  app.get( "/filteredimage", async ( req:Request, res:Response ) => {
+    let{image_url} = req.query
     if(!image_url)
     {
       res.status(400).send('Querty string missing');
     }
     
-   const promisedPath = filterImageFromURL(image_url)
+   const promisedPath : Promise<string> = filterImageFromURL(image_url)
    promisedPath.catch(err =>{
 
     console.log('An error occured while trying to read the file');
