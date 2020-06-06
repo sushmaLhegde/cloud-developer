@@ -1,0 +1,19 @@
+#Use nodeJS base image
+FROM node:13
+
+#Create a work directory
+WORKDIR /src
+
+#Install all appdependencies by copying package.json
+COPY package*.json ./
+
+
+RUN npm install
+#Copy app source
+COPY . . 
+
+#Bind the port to the application 
+EXPOSE 8080 
+
+#Define what command docker will run
+CMD ["node", "server.js"]
