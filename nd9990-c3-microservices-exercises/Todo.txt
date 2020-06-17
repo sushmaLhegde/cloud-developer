@@ -1,0 +1,4 @@
+Encode aws credentials
+write your travis.yaml
+
+in parallel try to run the course-03 version to see if that works. npm run dev on each backend folder

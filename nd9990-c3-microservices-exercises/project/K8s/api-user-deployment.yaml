@@ -2,17 +2,17 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    service: backend-user
-  name: backend-user
+    service: api-user
+  name: api-user
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        service: backend-user
+        service: api-user
     spec:
       containers:
-      - image: scheele/udacity-restapi-user
+      - image: thismycatsdockerhub/udagram-api-user
         name: backend-user 
         imagePullPolicy: Always  
         resources:

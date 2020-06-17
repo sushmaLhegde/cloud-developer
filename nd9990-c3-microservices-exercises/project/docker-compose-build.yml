@@ -1,0 +1,19 @@
+version: "3"    
+services:
+    reverseproxy:
+        build:
+            context: .
+        image:  thismycatsdockerhub/reverseproxy
+    api-user:
+        build:
+            context: udagram-api-user .
+        image: thismycatsdockerhub/udagram-api-user
+            
+    api-feed:
+        build:
+            context: udagram-api-feed .
+        image:  thismycatsdockerhub/udagram-api-feed
+    frontend:
+        build:
+            context: udagram-frontend .
+        image: thismycatsdockerhub/udagram-frontend
